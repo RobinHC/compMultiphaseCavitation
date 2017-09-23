@@ -1,0 +1,7 @@
+PhaseChange/MultiphaseCavitation.C
+PhaseChange/newMultiphaseCavitation.C
+
+Kunz/Kunz.C
+SchnerrSauer/SchnerrSauer.C
+
+LIB = $(FOAM_LIBBIN)/libmultiphaseCavitationModels
