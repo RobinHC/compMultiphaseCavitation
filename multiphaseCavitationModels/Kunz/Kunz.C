@@ -92,7 +92,7 @@ Foam::MultiphaseCavitations::Kunz::mDotP() const
 {
     const volScalarField& p = alpha1_.db().lookupObject<volScalarField>("p");
     volScalarField limitedAlpha1(min(max(alpha1_, scalar(0)), scalar(1)));
-
+    volScalarField limitedAlpha2(min(max(alpha2_, scalar(0)), scalar(1)));
     // The coefficients must be calculated for each time step, because the density changes
     volScalarField mcCoeff_(Cc_*rho2_/tInf_);
     volScalarField mvCoeff_(Cv_*rho2_/(0.5*rho1_*sqr(UInf_)*tInf_));
@@ -100,7 +100,7 @@ Foam::MultiphaseCavitations::Kunz::mDotP() const
 
     return Pair<tmp<volScalarField>>
     (
-        mcCoeff_*sqr(limitedAlpha1)*alpha2_
+        mcCoeff_*sqr(limitedAlpha1)*limitedAlpha2
        *pos(p - pSat())/max(p - pSat(), 0.01*pSat()),
 
         (-mvCoeff_)*limitedAlpha1*neg(p - pSat())
