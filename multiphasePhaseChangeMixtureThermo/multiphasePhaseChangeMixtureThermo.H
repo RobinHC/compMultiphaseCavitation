@@ -141,6 +141,7 @@ private:
         surfaceScalarField rhoPhi_;
 
         volScalarField alphas_;
+        volScalarField alphaSum_;
 
         typedef HashTable<scalar, interfacePair, interfacePair::hash>
             sigmaTable;

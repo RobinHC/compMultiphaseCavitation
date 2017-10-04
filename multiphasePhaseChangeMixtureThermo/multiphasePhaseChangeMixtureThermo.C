@@ -105,6 +105,19 @@ Foam::multiphasePhaseChangeMixtureThermo::multiphasePhaseChangeMixtureThermo
         mesh_,
         dimensionedScalar("alphas", dimless, 0.0)
     ),
+    alphaSum_
+    (
+        IOobject
+        (
+            "alphaSum",
+            mesh_.time().timeName(),
+            mesh_,
+            IOobject::NO_READ,
+            IOobject::AUTO_WRITE
+        ),
+        mesh_,
+        dimensionedScalar("alphaSum_", dimless, 0.0)
+    ),
 
     sigmas_(lookup("sigmas")),
     dimSigma_(1, 0, -2, 0, 0),
@@ -1206,6 +1219,12 @@ void Foam::multiphasePhaseChangeMixtureThermo::solveAlphas
             );
         }
 
+        if (alpha.name() == "water")
+        {
+
+        	volScalarField& implSource = implWaterSource.ref();
+        	volScalarField& explSource = explWaterSource.ref();
+
             MULES::limit
             (
                 1.0/mesh_.time().deltaT().value(),
@@ -1213,12 +1232,49 @@ void Foam::multiphasePhaseChangeMixtureThermo::solveAlphas
                 alpha,
                 phi_,
                 alphaPhiCorr,
-    			zeroField(),
-    			zeroField(),
+				implSource,
+				explSource,
                 1,
                 0,
                 true
             );
+
+        }
+
+        if (alpha.name() == "vapor")
+        {
+        	volScalarField& implSource = implVaporSource.ref();
+			volScalarField& explSource = explVaporSource.ref();
+
+            MULES::limit
+            (
+                1.0/mesh_.time().deltaT().value(),
+                geometricOneField(),
+                alpha,
+                phi_,
+                alphaPhiCorr,
+				implSource,
+				explSource,
+                1,
+                0,
+                true
+            );
+        }
+
+
+//            MULES::limit
+//            (
+//                1.0/mesh_.time().deltaT().value(),
+//                geometricOneField(),
+//                alpha,
+//                phi_,
+//                alphaPhiCorr,
+//    			zeroField(),
+//    			zeroField(),
+//                1,
+//                0,
+//                true
+//            );
 
         //- /////////////////////////////////////////////////////////////////
     	//- END - Build the limited fluxes of each phase
@@ -1441,6 +1497,14 @@ void Foam::multiphasePhaseChangeMixtureThermo::solveAlphas
         << endl;
 
     calcAlphas();
+
+
+    alphaSum_ *= 0.0;
+    forAllIter(PtrDictionary<phaseModel>, phases_, phasei)
+    {
+    	alphaSum_ += phasei();
+    }
+    alphaSum_ -= 1;
 }
 
 
