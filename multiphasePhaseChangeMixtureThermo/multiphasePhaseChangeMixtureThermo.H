@@ -50,6 +50,8 @@ SourceFiles
 namespace Foam
 {
 
+class MultiphaseCavitation;
+
 /*---------------------------------------------------------------------------*\
                          Class multiphasePhaseChangeMixtureThermo Declaration
 \*---------------------------------------------------------------------------*/

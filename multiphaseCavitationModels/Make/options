@@ -6,7 +6,8 @@ EXE_INC = \
     -I$(LIB_SRC)/transportModels/incompressible/lnInclude \
     -I$(LIB_SRC)/finiteVolume/lnInclude \
 	-ImultiphaseCavitationModels/lnInclude \
-	-I../multiphasePhaseChangeMixtureThermo/lnInclude
+	-I../multiphasePhaseChangeMixtureThermo/lnInclude \
+	-I../multiphasePhaseChangeMixtureThermo/phaseModel
 
 LIB_LIBS = \
     -lcompressibleTransportModels \
