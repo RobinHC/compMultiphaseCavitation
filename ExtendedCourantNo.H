@@ -33,6 +33,8 @@ scalar CoNum = 0.0;
 scalar meanCoNum = 0.0;
 scalar acousticCoNum = 0.0;
 
+tmp<volScalarField> psi = mixture.mixturePsi();
+
 if (mesh.nInternalFaces())
 {
     scalarField sumPhi
@@ -49,7 +51,7 @@ if (mesh.nInternalFaces())
     (
         fvc::surfaceSum
         (
-            fvc::interpolate(scalar(1)/sqrt(psi))*mesh.magSf()
+            fvc::interpolate(scalar(1)/sqrt(psi.ref()))*mesh.magSf()
         )().primitiveField()/mesh.V().field()
     )*runTime.deltaTValue();
 }
