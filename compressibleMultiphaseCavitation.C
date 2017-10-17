@@ -42,8 +42,10 @@ int main(int argc, char *argv[])
     #include "createControl.H"
     #include "createTimeControls.H"
     #include "createFields.H"
-    #include "CourantNo.H"
-    #include "setInitialDeltaT.H"
+//    #include "CourantNo.H"
+	#include "ExtendedCourantNo.H"
+//    #include "setInitialDeltaT.H"
+	#include "setInitialDeltaT_Extended.H"
 
     volScalarField& p = mixture.p();
     volScalarField& T = mixture.T();
@@ -57,9 +59,11 @@ int main(int argc, char *argv[])
     while (runTime.run())
     {
         #include "readTimeControls.H"
-        #include "CourantNo.H"
+//        #include "CourantNo.H"
+		#include "ExtendedCourantNo.H"
         #include "alphaCourantNo.H"
-        #include "setDeltaT.H"
+//        #include "setDeltaT.H"
+		#include "setDeltaT_Extended.H"
 
         runTime++;
 
