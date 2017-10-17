@@ -342,6 +342,19 @@ Foam::tmp<Foam::scalarField> Foam::multiphasePhaseChangeMixtureThermo::THE
 }
 
 
+Foam::tmp<Foam::volScalarField> Foam::multiphasePhaseChangeMixtureThermo::mixturePsi() const
+{
+	PtrDictionary<phaseModel>::const_iterator phasei = phases_.begin();
+
+	tmp<volScalarField> tpsi(phasei()*phasei().thermo().psi());
+
+	for (++phasei; phasei != phases_.end(); ++phasei)
+	{
+		tpsi.ref() += phasei()*phasei().thermo().psi();
+	}
+	return tpsi;
+}
+
 Foam::tmp<Foam::volScalarField> Foam::multiphasePhaseChangeMixtureThermo::rho() const
 {
     PtrDictionary<phaseModel>::const_iterator phasei = phases_.begin();

@@ -255,6 +255,9 @@ public:
             return rhoPhi_;
         }
 
+        //- Compressiblity
+        tmp<volScalarField> mixturePsi() const;
+
         //- Update properties
         virtual void correct();
 
