@@ -46,7 +46,6 @@ SourceFiles
 #include "regIOobject.H"
 #include "dictionary.H"
 
-
 #include "phaseModel.H"
 
 
@@ -58,6 +57,8 @@ namespace Foam
 /*---------------------------------------------------------------------------*\
                 Class MultiphaseCavitation Declaration
 \*---------------------------------------------------------------------------*/
+
+class phaseModel;
 
 class MultiphaseCavitation
 :
