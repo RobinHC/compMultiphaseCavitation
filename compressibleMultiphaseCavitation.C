@@ -40,7 +40,8 @@ int main(int argc, char *argv[])
     #include "createTime.H"
     #include "createMesh.H"
     #include "createControl.H"
-    #include "createTimeControls.H"
+    //#include "createTimeControls.H"
+	#include "createControls.H"
     #include "createFields.H"
 //    #include "CourantNo.H"
 	#include "ExtendedCourantNo.H"
@@ -58,7 +59,8 @@ int main(int argc, char *argv[])
 
     while (runTime.run())
     {
-        #include "readTimeControls.H"
+//        #include "readTimeControls.H"
+		#include "readControls.H"
 //        #include "CourantNo.H"
 		#include "ExtendedCourantNo.H"
         #include "alphaCourantNo.H"
