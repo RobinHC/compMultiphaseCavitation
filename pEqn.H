@@ -131,28 +131,10 @@
                 phase
             )
             {
-            	//Changing pos() to > SMALL so that div is only calc where the phase actually exists
-//				phaseModel alpha(phase());
-//				phaseModel limitedAlpha(min(max(alpha, scalar(0)), scalar(1)));
-//            	static const float stabilizingFactor = 1.0e-10;
-//            	forAll(limitedAlpha, celli) {
-//            		if (limitedAlpha[celli] < stabilizingFactor) {
-//            			limitedAlpha[celli] = 0;
-//					}
 				phase().dgdt() =
 						pos(phase())*
 					  (p_rghEqnComps[phasei] & p_rgh)/phase().thermo().rho();
             }
-/*            forAllIter(PtrDictionary<phaseModel>, mixture.phases(), phasei)
-            {
-                volScalarField& alphadgdt = phasei().dgdt();
-
-                forAll(phasei(), celli) {
-                	if (phasei()[celli] < 1.0e-3) {
-                		alphadgdt[celli] = 0;
-                	}
-                }
-            }*/
 
             phi = phiHbyA + p_rghEqnIncomp.flux();
 
@@ -164,15 +146,6 @@
 
     p = max(p_rgh + mixture.rho()*gh, pMin);
 
-    // Update densities from change in p_rgh
-/*    volScalarField pdiff(p_rgh - p_rgh_0);
-    forAll(pdiff, celli)
-    {
-    	if (pdiff[celli] < 0)
-    	{
-    		Info << "pdiff is negative, thus the rho value is subtracted. pdiff: " << pdiff[celli] << "\n";
-    	}
-    }*/
     mixture.correctRho(p_rgh - p_rgh_0);
     rho = mixture.rho();
 
