@@ -114,13 +114,21 @@ void Foam::MultiphaseCavitations::Kunz::correct()
 
 bool Foam::MultiphaseCavitations::Kunz::read()
 {
-    MultiphaseCavitationCoeffs_ = this->subDict(type() + "Coeffs");
+	if (MultiphaseCavitation::read())
+	{
+	    MultiphaseCavitationCoeffs_ = this->subDict(type() + "Coeffs");
 
-    MultiphaseCavitationCoeffs_.lookup("UInf") >> UInf_;
-    MultiphaseCavitationCoeffs_.lookup("tInf") >> tInf_;
-    MultiphaseCavitationCoeffs_.lookup("Cc") >> Cc_;
-    MultiphaseCavitationCoeffs_.lookup("Cv") >> Cv_;
-    return true;
+	    MultiphaseCavitationCoeffs_.lookup("UInf") >> UInf_;
+	    MultiphaseCavitationCoeffs_.lookup("tInf") >> tInf_;
+	    MultiphaseCavitationCoeffs_.lookup("Cc") >> Cc_;
+	    MultiphaseCavitationCoeffs_.lookup("Cv") >> Cv_;
+	    return true;
+	}
+	else
+	{
+		return false;
+	}
+
 }
 
 
