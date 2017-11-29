@@ -67,8 +67,6 @@ Foam::MultiphaseCavitation::MultiphaseCavitation
 	alpha2_(alpha2)
 
 {
-	Info << "MultiphaseCavitation constructor is called \n";
-	Info << "the value for parameter 'type' is: " << type << "\n";
 }
 
 
@@ -125,11 +123,21 @@ Foam::MultiphaseCavitation::vDotP() const
 
 bool Foam::MultiphaseCavitation::read()
 {
+		if (regIOobject::read())
+		{
+	        MultiphaseCavitationCoeffs_ = subDict(type() + "Coeffs");
+	        pSat_ = lookup("pSat");
 
-        MultiphaseCavitationCoeffs_ = subDict(type() + "Coeffs");
-        lookup("pSat") >> pSat_;
+	        return true;
+		}
+		else
+		{
+			return false;
+		}
 
-        return true;
+
+
+
 }
 
 
