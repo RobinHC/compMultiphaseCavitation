@@ -6,7 +6,6 @@ EXE_INC = \
     -I../
 
 LIB_LIBS = \
-    -lmultiphaseCavitationModels \
     -lcompressibleTransportModels \
     -lfluidThermophysicalModels \
     -lspecie \
