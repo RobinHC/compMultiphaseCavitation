@@ -43,7 +43,7 @@ SourceFiles
 #ifndef SchnerrSauer_H
 #define SchnerrSauer_H
 
-#include "../PhaseChange/MultiphaseCavitation.H"
+#include "MultiphaseCavitation.H"
 
 // * * * * * * * * * * * * * * * * *  * * * * * * * * * * * * * * * * //
 
