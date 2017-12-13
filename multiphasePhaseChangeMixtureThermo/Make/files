@@ -1,6 +1,13 @@
-../multiphaseCavitationModels/PhaseChange/MultiphaseCavitation.C
 phaseModel/phaseModel.C
 alphaContactAngle/alphaContactAngleFvPatchScalarField.C
+
+multiphaseCavitationModels/MultiphaseCavitation.C
+multiphaseCavitationModels/newMultiphaseCavitation.C
+
+multiphaseCavitationModels/Kunz/Kunz.C
+multiphaseCavitationModels/SchnerrSauer/SchnerrSauer.C
+
 multiphasePhaseChangeMixtureThermo.C
+
 
 LIB = $(FOAM_LIBBIN)/libmultiphasePhaseChangeMixtureThermo

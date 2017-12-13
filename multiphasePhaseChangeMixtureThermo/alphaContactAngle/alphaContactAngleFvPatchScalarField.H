@@ -190,6 +190,10 @@ public:
             );
         }
 
+	//- Destructor
+        virtual ~alphaContactAngleFvPatchScalarField()
+        {}
+
 
     // Member functions
 
